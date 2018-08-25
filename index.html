@@ -29,8 +29,8 @@
 						</tr>
 					</thead>
 					<tbody id="tabela-pacientes">
-						<tr class="paciente" >
-							<td class="info-nome">Paulo</td>
+						<tr class="paciente" id="paciente" >
+							<td  class="info-nome">Paulo</td>
 							<td class="info-peso">100</td>
 							<td class="info-altura">2.00</td>
 							<td class="info-gordura">10</td>
@@ -72,6 +72,18 @@
 
 			</section>
 		</main>
+		<script>
+			// document.querySelector('.paciente').textContent = "novotexto";
+			var paciente = document.querySelector("#paciente");
+			var tdPeso = paciente.querySelector(".info-peso"); 
+			var tdAltura = paciente.querySelector(".info-altura");
+			var tdImc = paciente.querySelector(".info-imc")
+			var peso = tdPeso.textContent;
 
+			var altura = tdAltura.textContent;
+			var imc = peso/(altura*altura);
+			var numero1 = 10;
+			tdImc.textContent = imc;
+		</script>
 	</body>
 </html>
