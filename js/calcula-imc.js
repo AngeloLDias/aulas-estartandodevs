@@ -7,7 +7,6 @@ for (var i = 0; i < pacientes.length; i = i + 1) {
     //variavel referente ao indice do paciente
     var paciente = pacientes[i];
 
-    
     // variaveis elemento td
     var tdPeso = paciente.querySelector(".info-peso");
     var tdAltura = paciente.querySelector(".info-altura");
