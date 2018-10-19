@@ -1,15 +1,17 @@
 // Variavel do botão do form
-var botaoAdicionar = document.querySelector('#adicionar-paciente');
+var botaoAdicionar = $('#adicionar-paciente')[0];
 
 // Determinando função de event do botão
-botaoAdicionar.addEventListener('click', function (event) {
+$(botaoAdicionar).click(function (event) {
     event.preventDefault();
 
     // Coletando form para pegar informações dele
-    var form = document.querySelector('#form-adiciona');
-
+    var form = $('#form-adiciona')[0];
+    
     // Determinando variaveis e suas respectivas funções
     var paciente = obtemPacienteDoFormulario(form);
+
+    var pacienteTr = montaTr(paciente);
 
     var erros = validaPaciente(paciente);
 
@@ -18,36 +20,25 @@ botaoAdicionar.addEventListener('click', function (event) {
         return;
     }
 
-    adicionaPacienteNaTabela(paciente);
+    //Pegando tabela
+    var tabela = $('#tabela-pacientes');
+
+    // Criando tr na tabela
+    $(tabela).append(pacienteTr);
 
     form.reset();
 
-    var mensagensErro = document.querySelector("#mensagens-erro");
+    var mensagensErro = $("#mensagens-erro")[0];
     mensagensErro.innerHTML = "";
-
 });
 
-// function adicionaPacienteNaTabela (paciente) {
-//     var pacienteTr = montaTr(paciente);
-//     //Pegando tabela
-//     var tabela = document.querySelector('#tabela-pacientes');
-//     // Criando tr na tabela
-//     tabela.appendChild(pacienteTr);
-// }
-
-function adicionaPacienteNaTabela(paciente){
-    var pacienteTr = montaTr(paciente);
-    var tabela = document.querySelector('#tabela-pacientes');
-    tabela.appendChild(pacienteTr);
-};
-
 function exibirMensagensDeErro(erros) {
-    var ul = document.querySelector("#mensagens-erro");
+    var ul = $("#mensagens-erro")[0];
     ul.innerHTML = "";
     erros.forEach(function(erros){
         var li = document.createElement("li");
-        li.textContent = erros;
-        ul.appendChild(li);
+        $(li).text(erros);
+        $(ul).append(li);
     });
 }
 
@@ -69,13 +60,13 @@ function obtemPacienteDoFormulario(form) {
 // Montando Tr
 function montaTr(paciente) {
     var pacienteTr = document.createElement('tr');
-    pacienteTr.classList.add('paciente');
+    $(pacienteTr).addClass("paciente");
 
-    pacienteTr.appendChild(montaTd(paciente.nome, 'info-nome'));
-    pacienteTr.appendChild(montaTd(paciente.peso, 'info-peso'));
-    pacienteTr.appendChild(montaTd(paciente.altura, 'info-altura'));
-    pacienteTr.appendChild(montaTd(paciente.gordura, 'info-gordura'));
-    pacienteTr.appendChild(montaTd(paciente.imc, 'info-imc'));
+    $(pacienteTr).append(montaTd(paciente.nome, 'info-nome'));
+    $(pacienteTr).append(montaTd(paciente.peso, 'info-peso'));
+    $(pacienteTr).append(montaTd(paciente.altura, 'info-altura'));
+    $(pacienteTr).append(montaTd(paciente.gordura, 'info-gordura'));
+    $(pacienteTr).append(montaTd(paciente.imc, 'info-imc'));
 
     return pacienteTr;
 }
@@ -83,8 +74,8 @@ function montaTr(paciente) {
 // Montando Td com conteudo e classe
 function montaTd(dado, classe) {
     var td = document.createElement('td');
-    td.textContent = dado;
-    td.classList.add(classe);
+    $(td).text(dado);
+    $(td).addClass(classe);
 
     return td;
 }
